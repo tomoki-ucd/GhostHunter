@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Represents RayGun object
+/// </summary>
 public class RayGun : MonoBehaviour
 {
     public LayerMask layerMask;
@@ -27,6 +30,9 @@ public class RayGun : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Shoot the ray from the ray gun.
+    /// </summary>
     public void Shoot()
     {
         source.PlayOneShot(shootingAudioClip);
