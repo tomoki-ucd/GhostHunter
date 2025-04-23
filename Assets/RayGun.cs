@@ -8,6 +8,8 @@ public class RayGun : MonoBehaviour
     public Transform shootingPoint; // Ray Starting Point
     public float maxLineDistance = 5.0f; // Ray max length
     public float lineShowTimer = 0.3f;  // Time length that line survives
+    public AudioSource source;  // Sound player
+    public AudioClip shootingAudioClip; // Sound container
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,6 +28,8 @@ public class RayGun : MonoBehaviour
 
     public void Shoot()
     {
+        source.PlayOneShot(shootingAudioClip);
+
         Ray ray = new Ray(shootingPoint.position, shootingPoint.forward);   // Memo: No argument to specify the endPoint.
         bool hasHit = Physics.Raycast(ray, out RaycastHit hit, maxLineDistance, layerMask); // Physics.Raycast(Ray, HitInfo, MaxDistance, LayerMask)
                                                                                             // Return true if it intersects any collider.
