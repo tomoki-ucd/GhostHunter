@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class RayGun : MonoBehaviour
 {
+    public LayerMask layerMask;
     public OVRInput.RawButton shootingButton;
     public LineRenderer linePrefab;
     public Transform shootingPoint; // Ray Starting Point
@@ -25,15 +26,25 @@ public class RayGun : MonoBehaviour
 
     public void Shoot()
     {
-        Debug.Log($"[{this.name}] Pew pew");
+        Ray ray = new Ray(shootingPoint.position, shootingPoint.forward);   // Memo: No argument to specify the endPoint.
+        bool hasHit = Physics.Raycast(ray, out RaycastHit hit, maxLineDistance, layerMask); // Physics.Raycast(Ray, HitInfo, MaxDistance, LayerMask)
+                                                                                            // Return true if it intersects any collider.
+        Vector3 endPoint = Vector3.zero;    // (0, 0, 0)
 
+        if(hasHit)
+        {
+            // Stop the ray
+            endPoint = hit.point;
+        }
+        else
+        {
+            endPoint = shootingPoint.position + shootingPoint.forward * maxLineDistance; // foward should be a unit vector 
+        }
 
         // Visualize Ray
         LineRenderer line = Instantiate(linePrefab);
         line.positionCount = 2; // Line has 2 vertex
         line.SetPosition(0, shootingPoint.position); // SetPosition(Vertex index, its position)
-
-        Vector3 endPoint = shootingPoint.position + shootingPoint.forward * maxLineDistance; // foward should be a unit vector 
 
         line.SetPosition(1, endPoint);
 
