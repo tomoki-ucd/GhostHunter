@@ -5,6 +5,7 @@ public class RayGun : MonoBehaviour
     public LayerMask layerMask;
     public OVRInput.RawButton shootingButton;
     public LineRenderer linePrefab;
+    public GameObject rayImpactPrefab;
     public Transform shootingPoint; // Ray Starting Point
     public float maxLineDistance = 5.0f; // Ray max length
     public float lineShowTimer = 0.3f;  // Time length that line survives
@@ -39,6 +40,10 @@ public class RayGun : MonoBehaviour
         {
             // Stop the ray
             endPoint = hit.point;
+
+            Quaternion rayImpactRotation = Quaternion.LookRotation(-hit.normal); // Reverse the direction of normal because RayImpact object can be only seen from the behind
+            GameObject rayImapct = Instantiate(rayImpactPrefab, hit.point, rayImpactRotation);
+            Destroy(rayImapct, 0.7f);
         }
         else
         {
@@ -49,9 +54,8 @@ public class RayGun : MonoBehaviour
         LineRenderer line = Instantiate(linePrefab);
         line.positionCount = 2; // Line has 2 vertex
         line.SetPosition(0, shootingPoint.position); // SetPosition(Vertex index, its position)
-
         line.SetPosition(1, endPoint);
 
-        Destroy(line.gameObject, lineShowTimer);
+        Destroy(line.gameObject, lineShowTimer);    // Destroy(targetObj, time to wait before destroying)
     }
 }

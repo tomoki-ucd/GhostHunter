@@ -1600,6 +1600,7 @@ MonoBehaviour:
     m_Bits: 1
   shootingButton: 67108864
   linePrefab: {fileID: 7323600460071716514, guid: 0751e35bd1c71481daa288d12ac02454, type: 3}
+  rayImpactPrefab: {fileID: 2642007608351296526, guid: fd031942cfeb9489abb15526fe2abd2a, type: 3}
   shootingPoint: {fileID: 1464299098}
   maxLineDistance: 5
   lineShowTimer: 0.3
