@@ -1768,6 +1768,7 @@ MonoBehaviour:
   minEdgeDistance: 0.3
   spawnLabels: 4
   normalOffset: -1
+  spawnTry: 1000
 --- !u!4 &1964602099
 Transform:
   m_ObjectHideFlags: 0

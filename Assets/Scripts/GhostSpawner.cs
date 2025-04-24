@@ -12,6 +12,7 @@ public class GhostSpawner : MonoBehaviour
     public float minEdgeDistance =  0.3f;   // The distance from the edge or corner of the room
     public MRUKAnchor.SceneLabels spawnLabels;
     public float normalOffset; 
+    public int spawnTry = 1000;
 
     private float _timer;   // Timeer to count past time
 
@@ -36,14 +37,25 @@ public class GhostSpawner : MonoBehaviour
     public void SpawnGhost()
     {
         MRUKRoom room = MRUK.Instance.GetCurrentRoom();
+        int currentTry = 0;
 
-//        room.GenerateRandomPositionOnSurface(MRUK.SurfaceType.VERTICAL, minEdgeDistance, LabelFilter.Included(spawnLabels), out Vector3 pos, out Vector3 norm); //LabelFiterIncluded() is obsolete
-        room.GenerateRandomPositionOnSurface(MRUK.SurfaceType.VERTICAL, minEdgeDistance, new LabelFilter(spawnLabels), out Vector3 pos, out Vector3 norm);  // SurfaceType.VERTICAL is basically wall
+        while(currentTry < spawnTry)
+        {
+            bool hasFoundPosition = room.GenerateRandomPositionOnSurface(MRUK.SurfaceType.VERTICAL, minEdgeDistance, new LabelFilter(spawnLabels), out Vector3 pos, out Vector3 norm);  // SurfaceType.VERTICAL is basically wall // When surfaceType is VERTICAL, selecting label such as floor do nothing.
+            if(hasFoundPosition)
+            {
+    //        Vector3 randomPosition = Random.insideUnitSphere * 3;   // return the random position within the sphera with radios 1.0 x 3.
+    //        Instantiate(prefabToSpawn, randomPosition, Quaternion.identity);    // It's needed to orient Ghost toward the player, isn't ?
+                Vector3 randomPositionNormalOffset = pos + norm * normalOffset; // Normal direction is toward inside of the room
+                randomPositionNormalOffset.y = 0;   // Set the hgith to the floor level.
+                Instantiate(prefabToSpawn, randomPositionNormalOffset, Quaternion.identity);
 
-//        Vector3 randomPosition = Random.insideUnitSphere * 3;   // return the random position within the sphera with radios 1.0 x 3.
-//        Instantiate(prefabToSpawn, randomPosition, Quaternion.identity);    // It's needed to orient Ghost toward the player, isn't ?
-        Vector3 randomPositionNormalOffset = pos + norm * normalOffset;
-        randomPositionNormalOffset.y = 0;   // Set the hgith to the floor level.
-        Instantiate(prefabToSpawn, randomPositionNormalOffset, Quaternion.identity);
+                return;
+            }
+            else
+            {
+                currentTry++;
+            }
+        }
     }
 }
