@@ -35,6 +35,8 @@ public class RayGun : MonoBehaviour
     /// </summary>
     public void Shoot()
     {
+        Debug.Log($"[{this.name}] Pew Pew");
+
         source.PlayOneShot(shootingAudioClip);
 
         Ray ray = new Ray(shootingPoint.position, shootingPoint.forward);   // Memo: No argument to specify the endPoint.
