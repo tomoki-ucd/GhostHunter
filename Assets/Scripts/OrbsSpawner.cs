@@ -7,6 +7,7 @@ using System.Collections.Generic;
 /// </summary>
 public class OrbsSpawner : MonoBehaviour
 {
+    public static OrbsSpawner instance;
     public int numberOfOrbsToSpawn = 5;
     public GameObject orbPrefab;
     public float height;    // Height of Orbs to be spawend.
@@ -15,6 +16,11 @@ public class OrbsSpawner : MonoBehaviour
 
     public int tryCount = 1000;
     private int _currentTry = 0;
+
+    void Awake()
+    {
+        instance = this; // "this" refers to the component itself, i.e., OrbsSpawner (MonoBehavior)   
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
