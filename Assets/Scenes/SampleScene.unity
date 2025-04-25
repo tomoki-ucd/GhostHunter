@@ -987,7 +987,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfOrbsToSpawn: 5
   orbPrefab: {fileID: 5577513359811129686, guid: 907705da069714104b85fe8d7a5da4b0, type: 3}
-  height: 1
+  height: 0.5
   spawnedOrbs: []
   tryCount: 1000
 --- !u!4 &1315749363

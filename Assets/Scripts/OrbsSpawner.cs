@@ -15,7 +15,6 @@ public class OrbsSpawner : MonoBehaviour
     public List<GameObject> spawnedOrbs;
 
     public int tryCount = 1000;
-    private int _currentTry = 0;
 
     void Awake()
     {
@@ -28,11 +27,24 @@ public class OrbsSpawner : MonoBehaviour
         MRUK.Instance.RegisterSceneLoadedCallback(SpawnOrbs);
     }
 
+    public void DestroyOrb(GameObject orb)
+    {
+        spawnedOrbs.Remove(orb);    // List type has Remove method.
+        Destroy(orb);
+
+        if(spawnedOrbs.Count == 0)
+        {
+            // Tentative solution
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
+    }
+
     /// <summary>
     /// Spawn orbs.
     /// </summary>
     public void SpawnOrbs()
     {
+        int _currentTry = 0;
 
         for(int i = 0; i < numberOfOrbsToSpawn; i++)
         {
@@ -43,6 +55,7 @@ public class OrbsSpawner : MonoBehaviour
 
             while(_currentTry < tryCount)
             {
+                // TO DO: Orb is sometimes spawn on "Not Walkable" area where Ghost cannot enter, which needs to be fixed.
                 bool hasFound = room.GenerateRandomPositionOnSurface(MRUK.SurfaceType.FACING_UP, 
                                                                      minDistanceToEdge,
                                                                      new LabelFilter(MRUKAnchor.SceneLabels.FLOOR),

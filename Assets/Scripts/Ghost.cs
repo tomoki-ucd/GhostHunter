@@ -7,6 +7,7 @@ using UnityEngine.AI;
 /// </summary>
 public class Ghost : MonoBehaviour
 {
+    public float eatDistance = 0.3f;
     public NavMeshAgent agent;
     public float speed = 1.0f;
     public Animator animator ;
@@ -22,7 +23,13 @@ public class Ghost : MonoBehaviour
 
         foreach(var orb in orbs)
         {
-            float d = Vector3.Distance(transform.position, orb.transform.position);
+            // Calculate distance between Ghost and Orb based on the horizontal plane.
+            Vector3 ghostPosition = transform.position;
+            ghostPosition.y = 0;
+            Vector3 orbPosition = orb.transform.position;
+            orbPosition.y = 0;
+
+            float d = Vector3.Distance(ghostPosition, orbPosition);
 
             if(d < minDistance)
             {
@@ -30,6 +37,11 @@ public class Ghost : MonoBehaviour
                 closest = orb;
             }
         }
+        if(minDistance < eatDistance)
+        {
+            OrbsSpawner.instance.DestroyOrb(closest);
+        }
+
         return closest;
     }
 
