@@ -13,7 +13,7 @@ public class RuntimeNavmeshBuilder : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        navmeshSurface = GetComponent<NavMeshSurface>();
+        navmeshSurface = GetComponent<NavMeshSurface>();    // Get NavMeshSurface component of NavMeshSurface gameobject.
         MRUK.Instance.RegisterSceneLoadedCallback(BuildNavmesh);    // Need to wait for scene loaded before calling navmeshSurface.BUildNavMesh();
                                                                     // That's why to use RegisterSceneLoadedCallback().
     }

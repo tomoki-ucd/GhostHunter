@@ -57,5 +57,6 @@ public class GhostSpawner : MonoBehaviour
                 currentTry++;
             }
         }
+        Debug.Log($"[{this.name}] Failed to find Position to spawn ghosts");
     }
 }
