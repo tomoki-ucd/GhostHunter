@@ -173,16 +173,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c28fa8d61f81fb742b1180a6d4516625, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c28fa8d61f81fb742b1180a6d4516625, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.42
+      value: 0.48
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: c28fa8d61f81fb742b1180a6d4516625, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: c28fa8d61f81fb742b1180a6d4516625, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f54e7b2f537c34097922192d81fdbe68, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2160,7 +2164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 65
   shootingButton: 67108864
   linePrefab: {fileID: 7323600460071716514, guid: 0751e35bd1c71481daa288d12ac02454, type: 3}
   rayImpactPrefab: {fileID: 2642007608351296526, guid: fd031942cfeb9489abb15526fe2abd2a, type: 3}
