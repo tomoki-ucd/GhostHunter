@@ -45,7 +45,7 @@ sysinfo.txt
 Docs/
 
 # Project Specfic
-Assets/50s-style-ray-gun*
+#Assets/50s-style-ray-gun*
 
 # Mac specif file
 *DS_Store
